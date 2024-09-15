@@ -43,7 +43,7 @@ for i in range(5):
     # Hỏi người chơi có muốn dùng quyền trợ giúp không
     if QUYEN_TRO_GIUP:
         CHON_TRO_GIUP = input("Bạn Có Muốn Chọn Quyền Trợ Giúp Không? (Y/N): ")
-        if CHON_TRO_GIUP.lower() == 'Y':
+        if CHON_TRO_GIUP.lower() == 'y':
             print("Các Quyền Trợ Giúp Có Sẵn: ")
             if 1 in QUYEN_TRO_GIUP:
                 print("1. 50:50")
@@ -98,7 +98,7 @@ for i in range(5):
         else:
             SO_THU_TU += 1
             CHOI_TIEP = input("Bạn Có Muốn Tiếp Tục? (Y/N): ")
-            if CHOI_TIEP.lower() == 'Y':
+            if CHOI_TIEP.lower() == 'y':
                 CAU_HOI_DA_RA.append(VI_TRI_CAU_HOI)
                 continue
             else:

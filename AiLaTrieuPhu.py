@@ -30,6 +30,7 @@ for j in GIAI_THUONG_LIST:
 CAU_HOI_DA_RA = []
 SO_THU_TU = 0
 QUYEN_TRO_GIUP = [1, 2]
+
 for i in range(5):
     print("Câu Hỏi Thứ {}".format(SO_THU_TU + 1))
     VI_TRI_CAU_HOI = random.randint(1, 18)
@@ -38,6 +39,52 @@ for i in range(5):
         VI_TRI_CAU_HOI = random.randint(1, 18)
 
     print(BO_CAU_HOI_LIST[VI_TRI_CAU_HOI])
+    
+    # Hỏi người chơi có muốn dùng quyền trợ giúp không
+    if QUYEN_TRO_GIUP:
+        CHON_TRO_GIUP = input("Bạn Có Muốn Chọn Quyền Trợ Giúp Không? (Y/N): ")
+        if CHON_TRO_GIUP.lower() == 'Y':
+            print("Các Quyền Trợ Giúp Có Sẵn: ")
+            if 1 in QUYEN_TRO_GIUP:
+                print("1. 50:50")
+            if 2 in QUYEN_TRO_GIUP:
+                print("2. Gọi Người Thân")
+            
+            TRO_GIUP = int(input("Chọn Quyền Trợ Giúp (1 hoặc 2): "))
+            
+            if TRO_GIUP == 1 and 1 in QUYEN_TRO_GIUP:
+                # Quyền trợ giúp số 1: 50:50
+                print("Bạn Đã Chọn Quyền Trợ Giúp Số 1")
+                DAP_AN_1 = CAU_TRA_LOI_LIST_ADJUST[VI_TRI_CAU_HOI]  # Đáp án đúng
+                DAP_AN_2 = chr(random.randint(65, 68))  # Đáp án ngẫu nhiên
+
+                while DAP_AN_2.lower() == DAP_AN_1.lower():
+                    DAP_AN_2 = chr(random.randint(65, 68))
+
+                DAP_AN_LIST = [DAP_AN_1, DAP_AN_2]
+
+                print('{} _____ {}'.format(DAP_AN_LIST[0], DAP_AN_LIST[1]))
+                QUYEN_TRO_GIUP.remove(1)
+            
+            elif TRO_GIUP == 2 and 2 in QUYEN_TRO_GIUP:
+                # Quyền trợ giúp số 2: Gọi người thân
+                print("Bạn Đã Chọn Quyền Trợ Giúp Số 2: Gọi Người Thân")
+                
+                # Xác suất người đúng là 80%
+                XAC_SUAT_DUNG = 0.8
+                GOI_Y_DUNG = random.random() < XAC_SUAT_DUNG
+
+                if GOI_Y_DUNG:
+                    GOI_Y = CAU_TRA_LOI_LIST_ADJUST[VI_TRI_CAU_HOI]  # Gợi ý đúng
+                else:
+                    GOI_Y = chr(random.randint(65, 68))  # Gợi ý sai
+                    while GOI_Y.lower() == CAU_TRA_LOI_LIST_ADJUST[VI_TRI_CAU_HOI].lower():
+                        GOI_Y = chr(random.randint(65, 68))
+
+                print("Người Thân Của Bạn Nói: Tôi Nghĩ Đáp Án Đúng Là '{}'".format(GOI_Y))
+                QUYEN_TRO_GIUP.remove(2)
+    
+    # Người chơi trả lời câu hỏi
     USER_ANSWER = input("Nhập Vào Câu Trả Lời Của Bạn: ")
     
     if USER_ANSWER.lower() == (CAU_TRA_LOI_LIST_ADJUST[VI_TRI_CAU_HOI]).lower():
@@ -47,15 +94,15 @@ for i in range(5):
                 """.format(GIAI_THUONG_LIST_ADJUST[SO_THU_TU]))
 
         if SO_THU_TU == 4:
-            print("Bạn Đã Hoàn Thành Trò Chơi Và Bạn Sẽ Nhận Được {} Đồng".format(GIAI_THUONG_LIST_ADJUST[SO_THU_TU]))
+            print("Bạn Đã Hoàn Thành Trò Chơi Và Bạn Nhận Được {} Đồng".format(GIAI_THUONG_LIST_ADJUST[SO_THU_TU]))
         else:
             SO_THU_TU += 1
             CHOI_TIEP = input("Bạn Có Muốn Tiếp Tục? (Y/N): ")
-            if CHOI_TIEP.lower() == 'y':
+            if CHOI_TIEP.lower() == 'Y':
                 CAU_HOI_DA_RA.append(VI_TRI_CAU_HOI)
                 continue
             else:
-                print("Bạn Đã Hoàn Thành Trò Chơi Và Bạn Sẽ Nhận Được {} Đồng".format(GIAI_THUONG_LIST_ADJUST[SO_THU_TU - 1]))
+                print("Bạn Đã Hoàn Thành Trò Chơi Và Bạn Nhận Được {} Đồng".format(GIAI_THUONG_LIST_ADJUST[SO_THU_TU - 1]))
                 break
     else:
         if SO_THU_TU == 0:
@@ -68,19 +115,5 @@ for i in range(5):
             print("""
         Bạn Đã Trả Lời Sai
         Xin Chúc Mừng Bạn Đã Trắng Tay
-                    """.format(GIAI_THUONG_LIST_ADJUST[0]))
+                    """)
             break
-
-# Quyền trợ giúp
-if QUYEN_TRO_GIUP == 1:
-    print("Bạn Đã Chọn Quyền Trợ Giúp Số 1")
-    DAP_AN_1 = CAU_TRA_LOI_LIST_ADJUST[VI_TRI_CAU_HOI]
-    DAP_AN_2 = chr(random.randint(65, 68))
-    while DAP_AN_2.lower() == DAP_AN_1.lower():
-        DAP_AN_2 = chr(random.randint(65, 68))
-
-    DAP_AN_LIST = [DAP_AN_1, DAP_AN_2]
-    DAP_AN_1_display = random.randint(0, 1)
-    DAP_AN_2_display = 1 - DAP_AN_1_display
-    print('{} --- {}'.format(DAP_AN_LIST[DAP_AN_1_display], DAP_AN_LIST[DAP_AN_2_display]))
-    QUYEN_TRO_GIUP.remove(1)

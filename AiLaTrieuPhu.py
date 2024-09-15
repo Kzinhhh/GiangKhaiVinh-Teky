@@ -62,6 +62,7 @@ for i in range(5):
                     DAP_AN_2 = chr(random.randint(65, 68))
 
                 DAP_AN_LIST = [DAP_AN_1, DAP_AN_2]
+                random.shuffle(DAP_AN_LIST)  # Trộn thứ tự 2 đáp án
 
                 print('{} _____ {}'.format(DAP_AN_LIST[0], DAP_AN_LIST[1]))
                 QUYEN_TRO_GIUP.remove(1)
